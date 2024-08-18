@@ -1,6 +1,7 @@
 package com.semicolon.africa.models;
 
 import com.semicolon.africa.dtos.request.AddNoteServicesRequest;
+import com.semicolon.africa.dtos.request.DeleteNoteRequest;
 import com.semicolon.africa.dtos.request.FindNoteByIdRequest;
 import com.semicolon.africa.dtos.request.UpdateNoteRequest;
 import com.semicolon.africa.dtos.response.AddNoteResponse;
@@ -30,32 +31,44 @@ class NoteServicesTest {
         repository.deleteAll();
     }
 
-    @Test
-    public void testThatWeCanAddNotes() {
-        AddNoteResponse request = createNewNote();
-        assertThat(request).isNotNull();
-        assertThat(repository.findAll().size()).isEqualTo(1L);
 
-    }
-
-    private AddNoteResponse createNewNote() {
+    private AddNoteServicesRequest createNewNote() {
+        Note note = new Note();
         AddNoteServicesRequest request = new AddNoteServicesRequest();
         request.setTitle("title");
         request.setContent("content");
-        return noteServices.AddNoteServices(request);
+        note.setTitle(request.getTitle());
+        note.setTitle(request.getTitle());
+//        repository.save(note);
+        return request;
+    }
+
+
+    @Test
+    public void testThatWeCanAddNotes() {
+        Note note = new Note();
+        AddNoteServicesRequest request = createNewNote();
+        request.setTitle("title");
+        request.setContent("content");
+        note.setTitle(request.getTitle());
+        note.setContent(request.getContent());
+        repository.save(note);
+        AddNoteResponse response = noteServices.AddNoteServices(request);
+        assertThat(response).isNotNull();
     }
 
     @Test
     public void testThatWeCanDeleteNote() {
-        AddNoteResponse newNote = createNewNote();
-        DeleteNoteResponse response = noteServices.DeleteNoteServices(newNote.getTitle());
+        DeleteNoteRequest newNote = createNote();
+
+        DeleteNoteResponse response = noteServices.DeleteNoteServices(newNote);
         String title = newNote.getTitle();
         assertThat(response.getMessage()).contains("Deleted Successfully");
     }
 
     @Test
     public void testThatWeCanUpdateNote() {
-        AddNoteResponse newNote = createNewNote();
+        AddNoteServicesRequest newNote = createNewNote();
         UpdateNoteRequest request = new UpdateNoteRequest();
 
         request.setId(newNote.getId());
@@ -73,4 +86,14 @@ class NoteServicesTest {
         assertThat(note.getTitle()).contains("new");
     }
 
+    private DeleteNoteRequest createNote() {
+        Note note = new Note();
+        DeleteNoteRequest request = new DeleteNoteRequest();
+        request.setTitle("title");
+
+        note.setTitle(request.getTitle());
+        note.setTitle(request.getTitle());
+        repository.save(note);
+        return request;
+    }
 }

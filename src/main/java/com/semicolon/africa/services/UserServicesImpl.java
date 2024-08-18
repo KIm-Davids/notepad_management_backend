@@ -39,10 +39,13 @@ public class UserServicesImpl {
     public LoginUserResponse login(LoginUserRequest request){
         LoginUserResponse response = new LoginUserResponse();
         validateUser(request);
-        User user = new User();
-        user.setEmail(request.getEmail());
-        user.setPassword(request.getPassword());
+        User user = findUserByEmailToLogin(request);
+//        user.setEmail(request.getEmail());
+//        user.setPassword(request.getPassword());
         user.setLoggedIn(true);
+        repository.save(user);
+        response.setEmail(user.getEmail());
+        response.setLoggedIn(true);
         response.setMessage("Logged In");
         return response;
     }
@@ -66,4 +69,7 @@ public class UserServicesImpl {
         return repository.findByEmail(request.getEmail()).orElseThrow(() -> new UserNotFoundException("User Not Found"));
     }
 
+    private User findUserByEmailToLogin(LoginUserRequest request){
+        return repository.findByEmail(request.getEmail()).orElseThrow(() -> new UserNotFoundException("User Not Found"));
+    }
 }

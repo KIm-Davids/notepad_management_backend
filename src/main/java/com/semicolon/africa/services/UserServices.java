@@ -1,12 +1,9 @@
 package com.semicolon.africa.services;
 
-<<<<<<< HEAD
-public interface UserServices {
-=======
-import com.semicolon.africa.dtos.request.LoginRequest;
-import com.semicolon.africa.dtos.request.LogoutRequest;
+import com.semicolon.africa.dtos.request.LogOutUserRequest;
+import com.semicolon.africa.dtos.request.LoginUserRequest;
 import com.semicolon.africa.dtos.request.RegisterUserRequest;
-import com.semicolon.africa.dtos.response.LoginResponse;
+import com.semicolon.africa.dtos.response.LoginUserResponse;
 import com.semicolon.africa.dtos.response.LogoutResponse;
 import com.semicolon.africa.dtos.response.RegisterUserResponse;
 import com.semicolon.africa.models.User;
@@ -17,8 +14,7 @@ public interface UserServices {
 
     RegisterUserResponse registerUserWith(RegisterUserRequest request);
     List<User> getAllUsers();
-    LoginResponse login(LoginRequest request);
-    LogoutResponse logoutResponse(LogoutRequest request);
+    LoginUserResponse login(LoginUserRequest request);
+    LogoutResponse logoutResponse(LogOutUserRequest request);
 
->>>>>>> 185de8656f14c1cda4289fd348d607e1d261c4e4
 }

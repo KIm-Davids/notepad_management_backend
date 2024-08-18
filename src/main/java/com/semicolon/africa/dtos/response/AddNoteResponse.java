@@ -11,9 +11,6 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 public class AddNoteResponse {
 
-    private String id;
-    private String title;
-    private String content;
-    private LocalDateTime dateCreated;
+    private String message;
 
 }

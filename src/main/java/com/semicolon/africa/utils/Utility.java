@@ -14,20 +14,22 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 public class Utility {
 
-    public static void setRequestToNote(AddNoteServicesRequest request, Note note){
+    public static Note setRequestToNote(AddNoteServicesRequest request){
+        Note note = new Note();
         note.setTitle(request.getTitle());
         note.setContent(request.getContent());
-        note.setDateCreated(request.getDateCreated());
+        note.setDateCreated(LocalDateTime.now());
+        return note;
     }
 
-    public static AddNoteResponse alreadySetNoteResponse(Note note){
-        AddNoteResponse response = new AddNoteResponse();
-        response.setId(note.getId());
-        response.setTitle(note.getTitle());
-        response.setContent(note.getContent());
-        response.setDateCreated(LocalDateTime.now());
-        return response;
-    }
+//    public static AddNoteResponse alreadySetNoteResponse(Note note){
+//        AddNoteResponse response = new AddNoteResponse();
+//        response.setId(note.getId());
+//        response.setTitle(note.getTitle());
+//        response.setContent(note.getContent());
+//        response.setDateCreated(LocalDateTime.now());
+//        return response;
+//    }
 
     public static UpdateNoteResponse UpdateNoteResponseUtility(UpdateNoteRequest request){
         Note note = new Note();
